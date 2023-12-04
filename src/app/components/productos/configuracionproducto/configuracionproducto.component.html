@@ -1,0 +1,650 @@
+<app-navbar></app-navbar>
+<div *ngIf="cargando" class="loading">
+  <img src="../../../../assets/img/carga.gif" alt="Loading..." />
+</div>
+
+  <div class="row mt-3">
+      <div class="col-md-6 col-ms-12">
+        <section class="vh-70 gradient-custom">
+          <div class="container py-1 ">
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-12">
+                <table class="table table-dark table-striped">
+                  <thead>
+                    <tr>
+                      <th>FOTO</th>
+                      <th>CLAVE</th>
+                      <th>NOMBRE</th>
+                      <th>PESO</th>
+                      <th>EDITAR</th>
+                      <th>METALES</th>
+                      <th>CONF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of productos">
+                      <th>
+                        <img [src]="apiUrl + '/storage/productos/' + item.Foto" class="img-thumbnail w-10" width="200" alt="Imagen">
+                      </th>
+                      <td>{{ item.id_productos }}</td>
+                      <td>{{ item.producto }}</td>
+                      <td>{{ item.peso }}</td>
+                      <td>
+                        <a [routerLink]="['/productos/editar', item.id_productos]"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                          <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                        </svg></a>
+                      </td>
+                      <td *ngIf="item.productofabrica == 0">
+                        <a [routerLink]="['/fabrica/metales', item.id_productos]"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-toggles2" viewBox="0 0 16 16">
+                          <path d="M9.465 10H12a2 2 0 1 1 0 4H9.465c.34-.588.535-1.271.535-2 0-.729-.195-1.412-.535-2z"/>
+                          <path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm.535-10a3.975 3.975 0 0 1-.409-1H4a1 1 0 0 1 0-2h2.126c.091-.355.23-.69.41-1H4a2 2 0 1 0 0 4h2.535z"/>
+                          <path d="M14 4a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                        </svg></a>
+                      </td>
+                      <td *ngIf="item.productofabrica == 1">
+                        NO DISPONIBLE
+                      </td>
+                      <td>
+                        <a (click)="configuracionproducto(item.id_productos)"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                        </svg></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="pagination justify-content-center">
+                  <button class="btn btn-primary" (click)="previousPage()">Anterior</button>
+                  <span class="mx-3">Página {{ currentPage }}</span>
+                  <button class="btn btn-primary" (click)="nextPage()">Siguiente</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-6 col-ms-12 textc ">
+        <section class="vh-70 gradient-custom">
+          <div class="container py-1 ">
+            <div class="row d-flex justify-content-center align-items-center darkcard">
+              <h6 class="text-center">Configuración: {{producto.producto}}</h6>
+              <div class="col-12">
+                <!-- EL PRODUCTO SOLO FABRICA NO PERMITE TENER VARIOS TIPOS DE ORO Y PIEDRAS -->
+                <div class="row" *ngIf="solofabrica">
+                  <div class="row text-center fst-italic">
+                      <p>ESTE PRODUCTO ES TIPO FABRICA NO PUEDES TENER VARIOS COLORES O PIEDRAS</p>
+                  </div>
+                  <div class="row mt-5 mb-5">
+                    <div class="col text-center">
+                      <button class="btn btn-primary" type="button" (click)="openimgfabrica()">AGREGAR IMAGEN</button>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-center align-items-center mb-5" *ngIf="formproductoimg">
+                    <div class="col-10">
+                      <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body text-center">
+                          <div class="card-header">
+                            <div class="d-grid gap-2">
+                              <button class="btn btn-outline-light"  (click)="closeimgfabrica()">CERRAR</button>
+                            </div>
+                          </div>
+                            <h2 class="fw-boldtext-uppercase">Registrar una imagen</h2>
+                            <p class="text-white-50">Elija la imagen de sus archivos</p>
+                            <form class="form-signin"  (ngSubmit)="SaveimgProducto()">
+                              <div class="form-outline form-white mb-4">
+                                <input type="file" (change)="imgproductofile($event)" name="image">
+                                <label class="form-label label-color" for="categoria">IMG PRODUCTO</label>
+                              </div>
+                              <button class="btn btn-outline-light btn-lg px-5" type="submit"  >REGISTRAR</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>IMG</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of listimgfabrica">
+                            <td>
+                              <img [src]="apiUrl + '/storage/fabrica/' + item.img" class="img-thumbnail w-5" alt="Imagen">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- CUANDO UN PRODUCTO TIENE ACTIVADO EL CUSTOM Y LAS PIEDRAS -->
+                <div class="row" *ngIf="custompriedras">
+                  <div class="row mt-5">
+                    <div class="col" *ngIf="plata">
+                      <h6>Plata</h6>
+                      <img width="90" [ngClass]="{'velegida': plataBorde}" id="rblancoimg" (click)="metalvariantes(id_plata,1)"
+                       src="../assets/img/metales/Blanco.png"
+                       >
+                    </div>
+                    <div class="col" *ngIf="amarillo">
+                      <h6>Amarillo</h6>
+                      <img width="90" [ngClass]="{'velegida': amarilloBorde}" (click)="metalvariantes(id_amarillo,2)" src="../assets/img/metales/Amarillo.png">
+                    </div>
+                    <div class="col" *ngIf="rosa">
+                      <h6>Rosa</h6>
+                      <img width="90"  [ngClass]="{'velegida': rosaBorde}"  (click)="metalvariantes(id_rosa,3)" src="../assets/img/metales/Rosa.png">
+                    </div>
+                    <div class="col" *ngIf="blanco">
+                      <h6>Blanco</h6>
+                      <img width="90" [ngClass]="{'velegida': blancoBorde}" (click)="metalvariantes(id_blanco,4)" src="../assets/img/metales/Blanco.png">
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col text-center" *ngIf="metalelegido">
+                      <button class="btn btn-primary" type="button" (click)="openVarianteModal()">REGISTRAR VARIANTE</button>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>PIEDRA UNO</th>
+                            <th>PIEDRA DOS</th>
+                            <th>IMG UNO</th>
+                            <th>IMG DOS</th>
+                            <th>IMG TRES</th>
+                            <th>ELIMINAR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of variantesmetal">
+                            <th>{{ item.piedrasuno}}</th>
+                            <td>{{ item.piedrasdos }}</td>
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.fotouno" class="img-thumbnail w-10" alt="Imagen">
+                            </td>
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.fotodos" class="img-thumbnail w-10" alt="Imagen">
+                            </td>
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.fototres" class="img-thumbnail w-10" alt="Imagen">
+                            </td>
+                            <td>
+                              <i class="bi bi-trash" (click)="destroyvariante(item.id_variante)"></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+                <!-- CUANDO UN PRODUCTO ES SOLO TIPO CUSTOM PERO NO TIENE PIEDRAS -->
+                <div class="row mt-3" *ngIf="solocustom">
+                  <div class="row mt-5">
+                    <div class="col" *ngIf="plata">
+                      <h6>Plata</h6>
+                      <img width="90" [ngClass]="{'velegida': plataBorde}" id="rblancoimg" (click)="metalvariantes(id_plata,1)"
+                       src="../assets/img/metales/Blanco.png"
+                       >
+                    </div>
+                    <div class="col" *ngIf="amarillo">
+                      <h6>Amarillo</h6>
+                      <img width="90" [ngClass]="{'velegida': amarilloBorde}" (click)="metalvariantes(id_amarillo,2)" src="../assets/img/metales/Amarillo.png">
+                    </div>
+                    <div class="col" *ngIf="rosa">
+                      <h6>Rosa</h6>
+                      <img width="90"  [ngClass]="{'velegida': rosaBorde}"  (click)="metalvariantes(id_rosa,3)" src="../assets/img/metales/Rosa.png">
+                    </div>
+                    <div class="col" *ngIf="blanco">
+                      <h6>Blanco</h6>
+                      <img width="90" [ngClass]="{'velegida': blancoBorde}" (click)="metalvariantes(id_blanco,4)" src="../assets/img/metales/Blanco.png">
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="metalelegido">
+                    <div class="col text-center">
+                      <button class="btn btn-primary " type="button" (click)="openimagenvariante()">AGREGAR IMAGEN</button>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>VARIANTES IMAGEN</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of variantesmetal">
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.img" class="img-thumbnail w-5" alt="Imagen">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+                <!-- CUANDO UN PRODUCTO ES TIPO ANILLO -->
+                <div class="row mt-3 mb-4" *ngIf="tipoanillo">
+                  <div class="row mt-5">
+                    <div class="col text-center">
+                      <button class="btn btn-primary " type="button" (click)="openNumeroModal()">REGISTRAR NUMERO</button>
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="producto.productocustom">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>NUMERO</th>
+                            <th>PESO 10</th>
+                            <th>PESO 14</th>
+                            <th>PESO 18</th>
+                            <th>PESO PLATA</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of numeros">
+                            <th>{{ item.numero}}</th>
+                            <td>{{ item.pesodiez }}</td>
+                            <td>{{ item.pesocatorce }}</td>
+                            <td>{{ item.pesodieciocho }}</td>
+                            <td>{{ item.pesoplata }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <!-- CUANDO UN PRODUCTO ES DE TIPO CADENA  -->
+                <div class="row mt-3 mb-4" *ngIf="tipocadena">
+                  <div class="row mt-5">
+                    <div class="col text-center">
+                      <button class="btn btn-primary " type="button" (click)="opencadenamodal()">REGISTRAR MEDIDA</button>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>MEDICA</th>
+                            <th>PESO</th>
+                            <th>STOCK</th>
+                            <th>EDITAR</th>
+                            <th>BORRAR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of medidasproducto">
+                            <th>{{ item.medida}}</th>
+                            <td>{{ item.peso }}</td>
+                            <td>{{ item.stock }}</td>
+                            <td><svg (click)="openeditamedida(item.id_productocadena)" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg></td>
+                            <td>
+                              <svg (click)="eliminarmedida(item.id_productocadena)" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                              </svg>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- <div class="col-md-6 col-ms-12 textc ">
+          <section class="vh-70 gradient-custom">
+            <div class="container py-1 ">
+              <div class="row d-flex justify-content-center align-items-center darkcard">
+                <h6 class="text-center">CONFIGURACION {{producto.producto}}</h6>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col" *ngIf="plata">
+                      <h6>Plata</h6>
+                      <img width="90" [ngClass]="{'velegida': plataBorde}" id="rblancoimg" (click)="metalvariantes(id_plata,1)"
+                       src="../assets/img/metales/Blanco.png"
+                       >
+                    </div>
+                    <div class="col" *ngIf="amarillo">
+                      <h6>Amarillo</h6>
+                      <img width="90" [ngClass]="{'velegida': amarilloBorde}" (click)="metalvariantes(id_amarillo,2)" src="../assets/img/metales/Amarillo.png">
+                    </div>
+                    <div class="col" *ngIf="rosa">
+                      <h6>Rosa</h6>
+                      <img width="90"  [ngClass]="{'velegida': rosaBorde}"  (click)="metalvariantes(id_rosa,3)" src="../assets/img/metales/Rosa.png">
+                    </div>
+                    <div class="col" *ngIf="blanco">
+                      <h6>Blanco</h6>
+                      <img width="90" [ngClass]="{'velegida': blancoBorde}" (click)="metalvariantes(id_blanco,4)" src="../assets/img/metales/Blanco.png">
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="producto.productocustom">
+                    <div class="col text-center" *ngIf="metalelegido">
+                      <button class="btn btn-primary" type="button" (click)="openVarianteModal()">REGISTRAR VARIANTE</button>
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="producto.productocustom">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>PIEDRA UNO</th>
+                            <th>PIEDRA DOS</th>
+                            <th>IMG UNO</th>
+                            <th>IMG DOS</th>
+                            <th>IMG TRES</th>
+                            <th>ELIMINAR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of variantesmetal">
+                            <th>{{ item.piedrasuno}}</th>
+                            <td>{{ item.piedrasdos }}</td>
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.fotouno" class="img-thumbnail w-10" alt="Imagen">
+                            </td>
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.fotodos" class="img-thumbnail w-10" alt="Imagen">
+                            </td>
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.fototres" class="img-thumbnail w-10" alt="Imagen">
+                            </td>
+                            <td>
+                              <i class="bi bi-trash" (click)="destroyvariante(item.id_variante)"></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="producto.productocustom">
+                    <div class="col text-center" *ngIf="tipoanillo">
+                      <button class="btn btn-primary " type="button" (click)="openNumeroModal()">REGISTRAR NUMERO</button>
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="producto.productocustom">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>NUMERO</th>
+                            <th>PESO 10</th>
+                            <th>PESO 14</th>
+                            <th>PESO 18</th>
+                            <th>PESO PLATA</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of numeros">
+                            <th>{{ item.numero}}</th>
+                            <td>{{ item.pesodiez }}</td>
+                            <td>{{ item.pesocatorce }}</td>
+                            <td>{{ item.pesodieciocho }}</td>
+                            <td>{{ item.pesoplata }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="metalelegido && !producto.productocustom">
+                    <div class="col text-center">
+                      <button class="btn btn-primary " type="button" (click)="openimagenvariante()">AGREGAR IMAGEN</button>
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="!producto.productocustom">
+                    <div class="col">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th>VARIANTES IMAGEN</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of variantesmetal">
+                            <td>
+                              <img [src]="apiUrl + '/storage/variantes/' + item.img" class="img-thumbnail w-5" alt="Imagen">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </div> -->
+  </div>
+<!-- REGISTRAR NUMERO -->
+<div
+  class="modal fade"
+  id="numerosModal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">REGISTRAR NUMERO</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" [formGroup]="NumerosForm" (ngSubmit)="onSubmitNumero()">
+          <div class="form-outline form-white mb-4">
+            <input type="text" class="form-control" formControlName="numero">
+            <label class="form-label label-color" for="cantidad">NUMERO</label>
+          </div>
+          <div class="form-outline form-white mb-4">
+            <input type="text" class="form-control" formControlName="peso">
+            <label class="form-label label-color" for="peso">PESO 14K</label>
+          </div>
+          <button class="btn btn-outline-light btn-lg px-5 text-center" type="submit">REGISTRAR</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- REGISTRAR VARIANTE -->
+<div
+  class="modal fade"
+  id="rvariantemodal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">REGISTRAR VARIANTE</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" [formGroup]="VariantesForm" (ngSubmit)="onSubmitvariante()">
+          <div class="d-flex">
+            <select class="form-select me-2" name="piedrauno" formControlName="piedrauno">
+              <option *ngFor="let item of piedras" [value]="item.id_piedra" >{{ item.piedra}}</option>
+            </select>
+            <label  class="form-label" for="piedrauno">Elija piedra uno</label>
+            <select class="form-select" name="piedrados"  formControlName="piedrados">
+              <option *ngFor="let item of piedras" [value]="item.id_piedra">{{ item.piedra}}</option>
+            </select>
+            <label  class="form-label" for="piedrados">Elija piedra dos</label>
+          </div>
+          <div class="form-outline form-white mb-4 mt-5">
+            <input type="file" (change)="Unoimgvariante($event)" name="image">
+            <label class="form-label label-color" for="categoria">IMG UNO</label>
+          </div>
+          <div class="form-outline form-white mb-4">
+            <input type="file" (change)="Dosimgvariante($event)" name="image">
+            <label class="form-label label-color" for="categoria">IMG DOS</label>
+          </div>
+          <div class="form-outline form-white mb-4">
+            <input type="file" (change)="Tresimgvariante($event)" name="image">
+            <label class="form-label label-color" for="categoria">IMG TRES</label>
+          </div>
+          <button class="btn btn-outline-light btn-lg px-5 text-center" type="submit">REGISTRAR</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- REGISTRAR IMG VARIANTE -->
+<div
+  class="modal fade"
+  id="rimgvariantemodal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">REGISTRAR IMG</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" [formGroup]="VariantesForm" (ngSubmit)="SaveImgVariante()">
+          <div class="form-outline form-white mb-4">
+            <input type="file" (change)="imgvariantefile($event)" name="image">
+            <label class="form-label label-color" for="categoria">IMG VARIANTE</label>
+          </div>
+          <button class="btn btn-outline-light btn-lg px-5 text-center" type="submit">REGISTRAR</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- REGISTRAR  CADENA -->
+<div
+  class="modal fade"
+  id="medidaModal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">REGISTRAR MEDICA CADENA</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" [formGroup]="MedidaForm" (ngSubmit)="onSubmitMedida()">
+          <div class="form-outline form-white mb-4">
+            <input type="text" class="form-control" formControlName="medida">
+            <label class="form-label label-color" for="medida"> MEDIDA</label>
+          </div>
+          <div class="form-outline form-white mb-4">
+            <input type="text" class="form-control" formControlName="peso">
+            <label class="form-label label-color" for="peso">PESO</label>
+          </div>
+          <div class="form-outline form-white mb-4">
+            <input type="number" class="form-control" formControlName="stock">
+            <label class="form-label label-color" for="stock">STOCK</label>
+          </div>
+          <button class="btn btn-outline-light btn-lg px-5 text-center" type="submit">REGISTRAR</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EDITAR MEDIDA -->
+<div
+  class="modal fade"
+  id="editMedidaModal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">EDITAR MEDICA CADENA</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" [formGroup]="editarMedidaForm" (ngSubmit)="onSubmitEditMedida()">
+          <div class="form-outline form-white mb-4">
+            <input type="text" class="form-control" formControlName="medida">
+            <label class="form-label label-color" for="medida"> MEDIDA</label>
+          </div>
+          <div class="form-outline form-white mb-4">
+            <input type="text" class="form-control" formControlName="peso">
+            <label class="form-label label-color" for="peso">PESO</label>
+          </div>
+          <div class="form-outline form-white mb-4">
+            <input type="number" class="form-control" formControlName="stock">
+            <label class="form-label label-color" for="stock">STOCK</label>
+          </div>
+          <button class="btn btn-outline-light btn-lg px-5 text-center" type="submit">REGISTRAR</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

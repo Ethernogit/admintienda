@@ -1,0 +1,104 @@
+/* styles.css */
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --main-color       : #1083D6 !important;
+  --title-color      : #BB86FC !important;
+  --primary-color      : #3700B3 !important;
+  --secondary-color      : #03DAC6 !important;
+  --text-color       : #cfe9f0 !important;
+  --light-text-color : #A0A7AC !important;
+  --body-color : #121212 !important;
+  --card-color: #546e7a !important;
+  --link-color: #ffab40 !important;
+  --titulodos: #D27685 !important;
+  --subtitulo: #020302 !important;
+  --contenido: #fff !important;
+  --azultittle: #1F77FA !important;
+  --categorias: #14CDCA !important;
+}
+body {
+  background-color: #333B51 !important;
+  overflow: auto !important;
+  overflow-x: hidden !important;
+  padding-right: 0px !important;
+}
+.row{
+  --bs-gutter-x: 1.5rem;
+}
+.label-d{
+  color: #121212;
+}
+.magenta{
+  color: var(--title-color)
+}
+.magenta:hover{
+  color: var(--titulodos);
+}
+.categoria{
+  color: var(--categorias);
+}
+.categoria:hover{
+  color: var(--titulodos);
+}
+.label-color{
+  color: var(--secondary-color);
+}
+.cardcolor{
+  background-color: var(--card-color);
+}
+.linkcolor{
+  color: var(--link-color);
+}
+.textc{
+  color: var(--contenido);
+}
+.linkcolor:hover{
+  color: var(--text-color);
+}
+.titulo{
+  color: var(--main-color);
+}
+.titulodos{
+  color: var(--titulodos);
+}
+.subtitulo{
+  color: var(--subtitulo);
+}
+.modal-dialog{
+  margin-top: 100px !important;
+}
+#modalmetalgramos{
+  margin-top: 100px !important;
+
+}
+.modal-content{
+  background-color: #373A46;
+}
+.darkcard{
+  background-color: var(--body-color);
+}
+.azult{
+  color: var(--azultittle);
+}
+.modal-title{
+  color: var(--titulodos);
+}
+
+.modal-body{
+  color: var(--contenido);
+}
+.overlay{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(74, 74, 74, .8);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.purpuralboton{
+  background-color: #8148c7;
+  color: #FFF;
+}

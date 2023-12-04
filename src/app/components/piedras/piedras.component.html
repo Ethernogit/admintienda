@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+
+<section class="vh-70 gradient-custom">
+  <div class="container py-1 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-5 mt-md-4 pb-5">
+              <h2 class="fw-bold mb-2 text-uppercase">Registrar piedra</h2>
+              <p class="text-white-50 mb-5">Ingrese el nombre de la piedra y una imagen!</p>
+              <form class="form-signin" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                <div class="form-outline form-white mb-4">
+                  <!-- <input type="text" class="form-control" formControlName="categoria"> -->
+                  <input type="text" class="form-control"  [(ngModel)]="piedra" name="piedra" placeholder="Piedra">
+                  <label class="form-label label-color" for="piedra">PIEDRA</label>
+                </div>
+                <div class="form-outline form-white mb-4">
+                  <input type="file" (change)="onFileSelected($event)" name="image">
+                  <label class="form-label label-color" for="categoria">IMG</label>
+                </div>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">REGISTRAR</button>
+                <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                  <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                  <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vh-70 gradient-custom">
+  <div class="container py-1 ">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>PIEDRA</th>
+              <th>IMG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let piedra of piedras">
+              <td>{{ piedra.id_piedra }}</td>
+              <td>{{ piedra.piedra }}</td>
+              <th>
+                <img [src]="apiUrl + '/storage/piedras/' + piedra.img" class="img-thumbnail w-25" alt="Imagen">
+
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

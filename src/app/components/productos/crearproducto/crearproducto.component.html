@@ -1,0 +1,156 @@
+<div *ngIf="cargando" class="loading">
+  <img src="../../../../assets/img/carga.gif" alt="Loading..." />
+</div>
+
+<section class="vh-70 gradient-custom">
+  <div class="container py-1 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body text-center">
+            <div class="">
+              <h2 class="fw-bold text-uppercase">REGISTRAR PRODUCTO</h2>
+              <p class="text-white-50 mb-5">Ingrese todos los datos del producto fabrica y custom!</p>
+              <form class="form-signin" [formGroup]="RegistroProducto" (ngSubmit)="onSubmitProductos()" enctype="multipart/form-data">
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="text" formControlName="nombre" class="form-control" />
+                      <label class="form-label" for="nombre">NOMBRE PRODUCTO</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="text" class="form-control" formControlName="codigo"/>
+                      <label class="form-label" for="codigo">CODIGO</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                      <select class="form-select" formControlName="categoria">
+                        <option *ngFor="let item of categorias" [value]="item.id_cat">{{ item.categoria}}</option>
+                      </select>
+                      <label  class="form-label" for="categoria">Elija Categoria</label>
+
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="number" formControlName="peso" class="form-control" />
+                      <label class="form-label" for="peso">PESO EN 14K</label>
+                    </div>
+                  </div>
+
+                </div>
+                <hr>
+                <div class="row mt-3 mb-3 text-center">
+                  <div class="col-3">
+                    <label for="">¿Proveedor?</label>
+                    <br>
+                    <input type="checkbox"
+                      class="form-check-input"
+                      formControlName="productoproveedor"
+                      (change)="checkproveedor()">
+                  </div>
+                  <div class="col-3" *ngIf="proveedorcheck">
+                    <select class="form-select" formControlName="id_proveedor">
+                      <option *ngFor="let item of proveedores" [value]="item.id_proveedor">{{ item.nombre_proveedor}}</option>
+                    </select>
+                    <label  class="form-label" for="categoria">Elija Proveedor</label>
+                  </div>
+                  <div class="col-3" *ngIf="proveedorcheck">
+                    <select class="form-select" formControlName="kilate">
+                      <option value="10">10 KILATES</option>
+                      <option value="14">14 KILATES</option>
+                      <option value="18">18 KILATES</option>
+                    </select>
+                    <label  class="form-label" for="categoria">KILATES</label>
+                  </div>
+                  <div class="col-3" *ngIf="proveedorcheck">
+                    <div class="form-outline">
+                      <input type="number" formControlName="pesoproveedor" class="form-control" />
+                      <label class="form-label" for="pesoproveedor">PESO</label>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row mb-4">
+                  <tinymce [config]="config" formControlName="descripcion"></tinymce>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-lg-4">
+                    <label data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Si un producto es tipo fabrica no podras elegir entre varios metales pero si puedes poner varias img"
+                    >¿Producto fabrica?<i class="bi bi-patch-question"></i></label>
+                    <br>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="fabrica"
+                      (change)="fabricacheck()"
+                      >
+                  </div>
+                  <div class="col-lg-4">
+                    <label data-bs-toggle="tooltip" data-bs-placement="top" title="Si un producto es tipo custom podras elegir entre varios tipos de metales">¿Producto custom?<i class="bi bi-patch-question"></i></label>
+                    <br>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="custom"
+                      (change)="customcheck()"
+
+                      >
+                  </div>
+
+                  <div class="col-lg-4">
+                    <label data-bs-toggle="tooltip" data-bs-placement="top" title="Si eliges la opcion de piedras podras registrar variantes con sus diferentes piedras">¿Piedras?<i class="bi bi-patch-question"></i></label>
+                    <br>
+                    <input class="form-check-input" type="checkbox"
+                      formControlName="piedras"
+                      (change)="piedracheck()"
+                      >
+                  </div>
+                </div>
+                <div class="row mb-4 text-center">
+                  <div class="col-lg-4">
+                    <label for="">¿Se puede grabar?</label>
+                    <br>
+                    <input type="checkbox"
+                      class="form-check-input"
+                      formControlName="grabado"
+                      [checked]="checkboxGrabado"
+                      (change)="toggleCheckbox()">
+                  </div>
+                  <div class="col-lg-4">
+                    <label data-bs-toggle="tooltip" data-bs-placement="top" title="Si eliges el tipo anillo podras crear diferentes numeros para la joya">¿Tipo anillo?<i class="bi bi-patch-question"></i></label>
+                    <br>
+                    <input class="form-check-input" type="checkbox" formControlName="anillo"
+                      (change)="anillocheck()"
+                    >
+                  </div>
+                  <div class="col-lg-4">
+                    <label data-bs-toggle="tooltip" data-bs-placement="top" title="Si eliges el tipo cadena podras registrar diferentes medidas,peso y el stock">¿Tipo cadena?<i class="bi bi-patch-question"></i></label>
+                    <br>
+                    <input class="form-check-input" type="checkbox" formControlName="productocadena"
+                      (change)="cadenacheck()"
+                    >
+                  </div>
+                </div>
+                <div class="form-outline form-white mb-4">
+                  <input type="file"(change)="selectImgUno($event)">
+                  <label class="form-label label-color" for="fotoprincipal">IMG PRINCIPAL</label>
+                </div>
+                <div class="form-outline form-white mb-4">
+                  <input type="file" (change)="selectImgGrabado($event)" [disabled]="!checkboxGrabado">
+                  <label cla s="form-label label-color" for="fotograbado">FOTO GRABADO</label>
+                </div>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">REGISTRAR</button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

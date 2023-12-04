@@ -1,0 +1,161 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <section class="vh-70 gradient-custom">
+        <div class="container py-1 ">
+          <div class="row d-flex justify-content-center align-items-center mt-5">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col">
+                      <h6>Datos del comprados</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      Nombre: {{usuario.name}}
+                    </div>
+                    <div class="col">
+                      Correo : {{usuario.email}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center align-items-center mt-3">
+            <div class="col-12">
+              <div class="card" *ngFor="let items of itemscar">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <img [src]="apiUrl + '/storage/variantes/' + items.img" width="100" class="img-fluid p-2 bg-light border">
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          {{items.producto}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          Total: ${{items.total}} MXN
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          Unidad: {{items.cantidad}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          Material: {{items.material}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          Kilate: {{items.kilate}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          Grabado: {{items.grabado}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          Numero: {{items.numero}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          Piedra Principal: {{items.piedrauno}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          Piedra Secundaria: {{items.piedrados}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center align-items-center mt-5">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col">
+                      <h6>Direccion de envio</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      Nombre Completo: {{datosenvio.nombrecompleto}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      CP : {{datosenvio.cp}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      Calle : {{datosenvio.callenum}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      Estado: {{datosenvio.estado}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      Ciudad: {{datosenvio.ciudad}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      Colonia: {{datosenvio.colonia}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      Correo: {{datosenvio.correo}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      Telefono: {{datosenvio.telefono}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      Referencias: {{datosenvio.detalles}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

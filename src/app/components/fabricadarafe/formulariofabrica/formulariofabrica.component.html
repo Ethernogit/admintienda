@@ -1,0 +1,340 @@
+
+
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="row align-items-center mt-5">
+    <!-- <div class="col">
+      <button type="button" class="btn btn-primary btn-lg"  (click)="openFormModal()" >METALES </button>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-secondary btn-lg">ENVIOS</button>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-secondary btn-lg">KILATES</button>
+    </div> -->
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link categoria" aria-current="page"  (click)="openFormModal()">METALES</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link categoria" (click)="openenviosModal()">ENVIOS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link categoria" (click)="openkilatesModal()">KILATES</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link categoria" (click)="openTipografias()">TIPOGRAFIAS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link categoria" (click)="openTipografias()">PIEDRAS</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- <app-crearproducto></app-crearproducto> -->
+<app-crearproducto></app-crearproducto>
+<!--form modal-->
+<div
+  class="modal fade"
+  id="modalmetalgramos"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Metales</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>METAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                1
+              </td>
+              <td>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#amarillocol" aria-expanded="false" aria-controls="collapseExample">
+                  ORO AMARILLO
+                </button>
+                <div class="collapse mt-2" id="amarillocol">
+                  <div class="card card-body">
+                    <form class="form-signin" [formGroup]="Amarrillogramo" (ngSubmit)="onSubmitamarillog()">
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="a10">10 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="a10">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="a14">14 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="a14">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="a18">18 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="a18">
+                        </div>
+                      </div>
+                      <div class="row mt-2">
+                        <div class="col">
+                          <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#rosacol" aria-expanded="false" aria-controls="collapseExample">
+                  ORO ROSA
+                </button>
+                <div class="collapse mt-2" id="rosacol">
+                  <div class="card card-body">
+                    <form class="form-signin" [formGroup]="Rosagramo" (ngSubmit)="onSubmitrosag()">
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="r10">10 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="r10">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="r14">14 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="r14">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="r18">18 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="r18">
+                        </div>
+                      </div>
+                      <div class="row mt-2">
+                        <div class="col">
+                          <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#blancocol" aria-expanded="false" aria-controls="collapseExample">
+                  ORO BLANCO
+                </button>
+                <div class="collapse mt-2" id="blancocol">
+                  <div class="card card-body">
+                    <form class="form-signin" [formGroup]="Blancogramo" (ngSubmit)="onSubmitblancog()">
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="b10">10 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="b10">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="b14">14 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="b14">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="b18">18 Kilates</label>
+                          <input type="number" class="form-control"  formControlName="b18" >
+                        </div>
+                      </div>
+                      <div class="row mt-2">
+                        <div class="col">
+                          <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#platacol" aria-expanded="false" aria-controls="collapseExample">
+                  PLATA
+                </button>
+                <div class="collapse mt-2" id="platacol">
+                  <div class="card card-body">
+                    <form class="form-signin" [formGroup]="Platagramo" (ngSubmit)="onSubmitplatag()">
+                      <div class="row">
+                        <div class="col">
+                          <label class="form-label label-d" for="b10">Plata</label>
+                          <input type="number" class="form-control"  formControlName="plata">
+                        </div>
+                      </div>
+                      <div class="row mt-2">
+                        <div class="col">
+                          <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ENVIOS -->
+<div
+  class="modal fade"
+  id="enviosmodal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">Envios</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-5">
+          <form class="form-signin"  [formGroup]="EnviosForm" (ngSubmit)="onSubmitEnvios()">
+            <div class="form-outline form-white mb-4">
+              <input type="number" class="form-control" formControlName="cantidad">
+              <label class="form-label label-color" for="cantidad">COSTO ENVIO</label>
+            </div>
+            <button class="btn btn-outline-light btn-lg px-5" type="submit">GUARDAR</button>
+          </form>
+        </div>
+        <hr>
+        <div class="row mt-5">
+          <form class="form-signin"  [formGroup]="MinimoEnviosForm" (ngSubmit)="onSubmitMinimoEnvios()">
+            <div class="form-outline form-white mb-4">
+              <input type="number" class="form-control" formControlName="minimocantidad">
+              <label class="form-label label-color" for="minimocantidad">MINIMO PARA ENVIO GRATIS</label>
+            </div>
+            <button class="btn btn-outline-light btn-lg px-5" type="submit">GUARDAR MINIMO</button>
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- KILATES -->
+<div
+  class="modal fade"
+  id="kilatesmodal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">KILATES</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>kilate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let kilate of kilates">
+              <td>{{ kilate.id_kilate }}</td>
+              <td>{{ kilate.kilate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- TIPOGRAFIAS MODAL -->
+<div
+  class="modal fade"
+  id="tipografiasModal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">TIPOGRAFIAS</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h3>Hello!</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveSomeThing()">
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <section class="vh-70 gradient-custom">
+        <div class="container py-1 ">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12">
+              <div class="card mt-3" *ngFor="let compra of comprasitems">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col align-self-start">
+                      {{compra.clavecompra}}
+                    </div>
+                    <div class="col align-self-start">
+                      {{compra.created_at}}
+                    </div>
+                    <div class="col align-self-end">
+                      {{compra.name}} | {{compra.email}}
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col" *ngIf="!compra.enviado && !compra.entregado">
+                      <button type="button" class="btn btn-primary" disabled>Preparando</button>
+                    </div>
+                    <div class="col" *ngIf="compra.enviado && !compra.entregado">
+                      <button type="button" class="btn btn-primary" disabled>Enviado</button>
+                    </div>
+                    <div class="col" *ngIf="compra.enviado && compra.entregado">
+                      <button type="button" class="btn btn-primary" disabled>Entregado</button>
+                    </div>
+                    <div class="col">
+                      ${{compra.totalcompra}} MXN
+                    </div>
+                    <div class="col">
+                      GUIA DE ENVIO: {{compra.guiaenvio}}
+                    </div>
+                    <div class="col">
+                      <div class="row mt-1">
+                        <div class="col">
+                          <a class="btn btn-primary" [routerLink]="['/detallescompra/', compra.id_compras]">Ver detalle</a>
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <div class="col">
+                          <a class="btn btn-primary" (click)="OpenModalGuia(compra.guiaenvio,compra.id_compras)">Actualizar guia</a>
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <div class="col">
+                          <a class="btn btn-primary" (click)="OpenModalStatus(compra.id_compras,compra.enviado,compra.entregado)">Cambiar estatus</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!-- MODAL DE GUIA -->
+<div
+  class="modal fade"
+  id="guiamodal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ACTUALIZAR GUIA</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" [formGroup]="NuevaGuia" (ngSubmit)="GuardarGuia()">
+          <div class="row mt-3">
+            <div class="col">
+              <label for="">Inserte la guia</label>
+              <input type="text" class="form-control" formControlName="guia" name="guia" placeholder="guia">
+            </div>
+          </div>
+          <div class="row mt-3 text-center">
+            <div class="col">
+              <button type="submit" class="btn darafe-color shadow-lg p-3 mb-5 bg-body rounded">GUARDAR</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL DE ESTATUS DE COMPRA -->
+<div
+  class="modal fade"
+  id="statuscompra"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ESTADO DE LA COMPRA</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" [formGroup]="StatusCompra" (ngSubmit)="GuardarStatus()">
+          <div class="row mt-3">
+            <div class="col">
+              <select class="form-select" formControlName="status" name="status">
+                <option value="1">Preparando</option>
+                <option value="2">Enviado</option>
+                <option value="3">Recibido</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3 text-center">
+            <div class="col">
+              <button type="submit" class="btn darafe-color shadow-lg p-3 mb-5 bg-body rounded">GUARDAR</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

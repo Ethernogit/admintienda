@@ -1,0 +1,91 @@
+<!-- <form   method="post" (ngSubmit)="Guardarmetales()" enctype="multipart/form-data"> -->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="volverAtras()">REGRESAR</button>
+      </div>
+    </div>
+    <div class="row">
+      <section class="vh-70 gradient-custom textc">
+        <div class="container py-1 ">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-ms-12 col-md-6 cardcolor">
+
+              <div class="card subtitulo">
+                <div class="card-header">
+                  {{producto.producto}}
+                </div>
+                <img [src]="apiUrl + '/storage/productos/' + producto.Foto" class="img-thumbnail w-5" alt="Imagen">
+
+              </div>
+            </div>
+            <div class="col-ms-12 col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="amarillo" (change)="orostatus(1,amarillo)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">ORO AMARILLO</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="a10k" (change)="orokilate(10,1,a10k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">10 KILATES</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="a14k" (change)="orokilate(14,1,a14k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">14 KILATES</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="a18k" (change)="orokilate(18,1,a18k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">18 KILATES</label>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="rosa" (change)="orostatus(2,rosa)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">ORO ROSA</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="r10k" (change)="orokilate(10,2,r10k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">10 KILATES</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="r14k" (change)="orokilate(14,2,r14k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">14 KILATES</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="r18k" (change)="orokilate(18,2,r18k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">18 KILATES</label>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="blanco" (change)="orostatus(3,blanco)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">ORO BLANCO</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="b10k" (change)="orokilate(10,3,b10k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">10 KILATES</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="b14k" (change)="orokilate(14,3,b14k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">14 KILATES</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="b18k" (change)="orokilate(18,3,b18k)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">18 KILATES</label>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="plata" (change)="orostatus(4,plata)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">PLATA</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+

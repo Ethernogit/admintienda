@@ -1,0 +1,183 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+  <!-- <div class="row justify-content-center">
+      <nav class="navbar navbar-expand-lg" data-bs-toggle="collapse" data-bs-target="#navbarText" >
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <i class="bi bi-scooter"></i>
+            </a>
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-2">
+                <li class="nav-item flex-fill text-center me-2 mt-2">
+                  <button class="btn purpuralboton nav-link btn btnmorado rounded mx-auto " (click)="openproveedor()">REGISTRO PROVEEDOR</button>
+                </li>
+                <li class="nav-item flex-fill text-center me-2 mt-2">
+                  <button class="btn purpuralboton nav-link btn btnmorado rounded mx-auto ">REGISTRO PRODUCTO</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </nav>
+  </div> -->
+  <div class="row justify-content-center mt-5">
+    <div class="row ">
+      <div class="col-6 bg-dark text-white">
+        <button class="btn btn-outline-light px-5" (click)="closeproveedor()"><i class="bi bi-x-lg"></i></button>
+        <h2 class="fw-bold mb-2 text-uppercase text-center">REGISTRAR UN PROVEEDOR</h2>
+
+        <form class="form-signin"  [formGroup]="formProveedor" (ngSubmit)="submitProveedor()">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-ms-4 col-lg-4">
+                <div class="form-outline">
+                  <label class="form-label" for="nombre_proveedor">NOMBRE PROVEEDOR</label>
+                  <input type="text"  formControlName="nombre_proveedor" name="nombre_proveedor" class="form-control"/>
+                </div>
+            </div>
+            <div class="col-ms-4 col-lg-4">
+                <div class="form-outline">
+                  <label class="form-label" for="telefono">TELEFONO</label>
+                  <input type="text"  formControlName="telefono" name="telefono" class="form-control"/>
+                </div>
+            </div>
+            <div class="col-ms-4 col-lg-4">
+              <div class="form-outline">
+                <label class="form-label" for="email_proveedor">CORREO</label>
+                <input type="text"  formControlName="email_proveedor" name="email_proveedor" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center align-items-center">
+            <div class="col-ms-3 col-lg-4">
+                <div class="form-outline">
+                  <label class="form-label" for="diez">10 kilates precio</label>
+                  <input type="number"  formControlName="diez" name="diez" class="form-control"/>
+                </div>
+            </div>
+            <div class="col-ms-3 col-lg-4">
+                <div class="form-outline">
+                  <label class="form-label" for="catorce">14 kilates precio</label>
+                  <input type="number"  formControlName="catorce" name="catorce" class="form-control"/>
+                </div>
+            </div>
+            <div class="col-ms-3 col-lg-4">
+              <div class="form-outline">
+                <label class="form-label" for="dieciocho">18 kilates precio</label>
+                <input type="number"  formControlName="dieciocho" name="dieciocho" class="form-control"/>
+              </div>
+            </div>
+            <div class="col-ms-3 col-lg-3">
+              <div class="form-outline">
+                <label class="form-label" for="ganancia">Ganancia</label>
+                <input type="number"  formControlName="ganancia" name="ganancia" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center text-center mt-3 mb-2">
+            <button class="btn btn-outline-light btn-lg px-5" type="submit">REGISTRAR</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-5 bg-dark text-white text-center">
+        <table class="table table-info table-striped mt-3 ">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>DIEZ</th>
+              <th>CATORCE</th>
+              <th>DIECIOCHO</th>
+              <th>GANANCIA</th>
+              <th>ADITAR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of proveedores">
+              <td>{{ item.nombre_proveedor }}</td>
+              <td>{{ item.diez }}</td>
+              <td>{{ item.catorce }}</td>
+              <td>{{ item.dieciocho }}</td>
+              <td>{{ item.ganancia }}</td>
+              <td>
+                <a (click)="openedit(item.id_proveedor)"><i class="bi bi-pencil-fill"></i></a>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EDITAR PROVEEDORES -->
+<div
+  class="modal fade"
+  id="editarproveedormodal"
+  tabindex="-1"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-white">EDITAR PROVEEDOR</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-5">
+          <form class="form-signin"  [formGroup]="EditarProveedor" (ngSubmit)="GuardarProveedorEdit()">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-6">
+                <div class="form-outline">
+                  <label class="form-label" for="nombre_proveedor">NOMBRE PROVEEDOR</label>
+                  <input type="text"  formControlName="nombre_proveedor" name="nombre_proveedor" class="form-control"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-outline">
+                  <label class="form-label" for="diez">10 kilates precio</label>
+                  <input type="number"  formControlName="diez" name="diez" class="form-control"/>
+                </div>
+            </div>
+            </div>
+
+            <div class="row justify-content-center align-items-center">
+
+              <div class="col-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="catorce">14 kilates precio</label>
+                    <input type="number"  formControlName="catorce" name="catorce" class="form-control"/>
+                  </div>
+              </div>
+              <div class="col-4">
+                <div class="form-outline">
+                  <label class="form-label" for="dieciocho">18 kilates precio</label>
+                  <input type="number"  formControlName="dieciocho" name="dieciocho" class="form-control"/>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-outline">
+                  <label class="form-label" for="ganancia">Ganancia</label>
+                  <input type="number"  formControlName="ganancia" name="ganancia" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center align-items-center mt-3">
+              <button class="btn btn-outline-light btn-lg px-5" type="submit">GUARDAR</button>
+
+            </div>
+          </form>
+        </div>
+        <hr>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
